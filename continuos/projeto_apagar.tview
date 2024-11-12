@@ -6,7 +6,7 @@
   <Author>No author</Author>
 
   <te_da:DataSourceList xmlns:te_common="http://www.terralib.org/schemas/common">
-    <te_da:DataSource access_driver="OGR" id="6e1abf92-dd4a-409d-8ba1-957963b88b67" type="OGR">
+    <te_da:DataSource access_driver="OGR" id="70818819-a426-4947-8fc7-d14ddd8036f7" type="OGR">
       <te_da:Title>csAC</te_da:Title>
       <te_da:Description>Created on TerraME</te_da:Description>
       <te_da:URI>file%3A%2F%2F..%2Fdata%2Fcs_ac%2FcsAC.shp</te_da:URI>
@@ -16,12 +16,12 @@
   <ComponentList/>
 
   <te_map:LayerList>
-    <te_map:DataSetLayer id="da8c1cb1-da48-4431-9d7d-c6de44201c03">
+    <te_map:DataSetLayer id="8e8fd81e-3cf2-48dc-93fe-62643c0e82e1">
       <te_map:Title>csAC</te_map:Title>
       <te_map:Visible>NOT_VISIBLE</te_map:Visible>
       <te_map:Encoding>ISO-8859-1</te_map:Encoding>
       <te_map:DataSetName>csAC</te_map:DataSetName>
-      <te_map:DataSourceId>6e1abf92-dd4a-409d-8ba1-957963b88b67</te_map:DataSourceId>
+      <te_map:DataSourceId>70818819-a426-4947-8fc7-d14ddd8036f7</te_map:DataSourceId>
       <te_map:SRSInfo>
         <te_map:SRID>29101</te_map:SRID>
         <te_map:Proj4>+proj=poly +lat_0=0 +lon_0=-54 +x_0=5000000 +y_0=10000000 +ellps=aust_SA +towgs84=-66.87,4.37,-38.52,0,0,0,0 +units=m +no_defs</te_map:Proj4>

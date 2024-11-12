@@ -83,7 +83,7 @@ Lab1 = LuccMEModel
 	{
 		outputTheme = "../tmp/Lab1_",
 		mode = "multiple",
-		saveYears = {2013, 2014},
+		saveYears = {2013},
 		saveAttrs = 
 		{
 			"f_out",
