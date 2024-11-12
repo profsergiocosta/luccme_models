@@ -57,6 +57,7 @@ Lab1 = LuccMEModel
 		project = "t3mp.tview",
 		layer = "layer",
 		cellArea = 1,
+		xy = {"col", "lin"},
 	},
 
 	-----------------------------------------------------
@@ -103,6 +104,14 @@ timer = Timer
 		start = Lab1.startTime,
 		action = function(event)
 					Lab1:run(event)
+					map = Map{
+						target = Lab1.cs,
+						select = "f_out",
+						value = {1, 0},
+						color = {"black", "gray"}
+					}
+
+
 				  end
 	}
 }
@@ -113,13 +122,22 @@ env_Lab1:add(timer)
 -----------------------------------------------------
 -- ENVIROMMENT EXECUTION                           --
 -----------------------------------------------------
+
+
+
 if Lab1.isCoupled == false then
-	tsave = databaseSave(Lab1)
-	env_Lab1:add(tsave)
+	--tsave = databaseSave(Lab1)
+	--env_Lab1:add(tsave)
+
 	env_Lab1:run(Lab1.endTime)
+
+
+
 	saveSingleTheme(Lab1, true)
 	projFile = File("t3mp.tview")
 	if(projFile:exists()) then
 		projFile:delete()
 	end
 end
+
+
