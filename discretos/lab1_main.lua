@@ -104,12 +104,6 @@ timer = Timer
 		start = Lab1.startTime,
 		action = function(event)
 					Lab1:run(event)
-					map = Map{
-						target = Lab1.cs,
-						select = "f_out",
-						value = {1, 0},
-						color = {"black", "gray"}
-					}
 
 
 				  end
