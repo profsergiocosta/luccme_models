@@ -43,6 +43,9 @@ import pandas as pd
 
 import salabim as sim
 
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+
 '''
 
 cs_moju.create_neighborhood()
@@ -80,6 +83,7 @@ class PotentialDNeighSimpleRule (sim.Component):
 
 
 
+
 class PotentialDNeighSimpleRule (sim.Component):
 
     def setup(self):
@@ -89,11 +93,47 @@ class PotentialDNeighSimpleRule (sim.Component):
 
     def process(self):
         while True:
-            print(f"[Tempo {env.now()} ] ")
+            print(f"[Tempo {env.now()} ] Calculo de Potencial")
             for lu in env.landUseTypes:
                 serie = env.cs.apply (lambda row: env.cs.neighs(row.name)[lu].mean(), axis=1)
                 env.pcs[lu] = serie
             self.hold(1)
+
+class AllocationDSimpleOrdering (sim.Component):
+
+    def process (self):
+        while True:
+            ano = env.now()
+            print(f"[Tempo {env.now()} ] Alocação")
+
+            for_idx = env.cs.query("f == 1").index
+
+            indices = env.pcs.loc[for_idx].sort_values (by='d', ascending=False).iloc[:100].index
+            #print (env.cs.loc[indices])
+            env.cs.loc[indices, 'f'] = 0
+            env.cs.loc[indices, 'd'] = 1
+
+            
+            update(ano, env.cs) 
+            plt.draw()  # Desenha o gráfico na tela
+            plt.pause(0.1)  # Pausa para a atualização visual
+            
+
+            self.hold(1)
+
+
+
+
+# Criar uma figura para a animação
+fig, ax = plt.subplots(1, 1, figsize=(10, 6))
+
+def update(ano, cs):
+    ax.clear()  # Limpa o gráfico antes de redesenhar
+    cs.plot(ax=ax, column="f", cmap='coolwarm', legend=False) 
+    ax.set_title(f'Mapa para o Ano {ano}')  
+
+
+
 
 
 # criar uma subclasse para explicitar os parametros
@@ -104,19 +144,18 @@ env.cs = GeoLuccDataFrame(
     id_name="object_id_"
 )
 
-env.pcs = pd.DataFrame()
+#print (env.cs.index)
+
+
+env.pcs = env.cs[["geometry"]].copy()
+print (type(env.pcs))
+print (env.pcs.head())
+
 
 env.landUseTypes = ["f", "d", "o"]
 
-pt = PotentialDNeighSimpleRule()
-
-'''
-def neighs (idx):
-    return env.cs.loc[idx]
-
-valores_mapeados = list( map(neighs, env.cs._wr.neighbors.values()) )
-dic = dict(zip(env.cs._wr.neighbors.keys(), valores_mapeados))
-'''
+p1 = PotentialDNeighSimpleRule()
+a1 = AllocationDSimpleOrdering()
 
 
 
