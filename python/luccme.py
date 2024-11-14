@@ -27,23 +27,16 @@ class GeoLuccDataFrame (GeoDataFrame):
         self.set_index(id_name, inplace=True)
         self.neighs_ = None
 
+    # custo alto de memoria
     def create_neighborhood(self):
         neighbors = weights.contiguity.Queen.from_dataframe(self, use_index=True).neighbors
         values = map(lambda idx: self.loc[idx], neighbors.values())
         self.neighs_ = dict(zip(neighbors.keys(), values))
 
-
-
     def neighs (self, idx):
         return self.neighs_[idx]
 
-'''
-    def create_neighborhood(self):
-        self._wr = weights.contiguity.Queen.from_dataframe(self, use_index=True)
 
-    def neighs (self, idx):
-        return self.loc[self._wr.neighbors[idx]]
-'''
 
 import geopandas as gpd
 import pandas as pd
